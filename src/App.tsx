@@ -1,26 +1,71 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import AudioTrack from './AudioTrack';
+import CommonTimeline from './CommonTimeline';
+import { Track, TrackPart } from './models';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
-function App() {
+
+const App: React.FC = () => {
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [parts, setParts] = useState<TrackPart[]>([]);
+
+  const onDragEnd = (result: any) => {
+    if (!result.destination) return;
+    const items = Array.from(parts);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setParts(items);
+  };
+  const handleSelectPart = (part: TrackPart) => {
+    setParts((prevParts) => [...prevParts, part]);
+  };
+
+  const addTrack = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const newTrackId = tracks.length + 1;
+      const newTrack: Track = {
+        id: newTrackId,
+        url: URL.createObjectURL(file),
+        parts: [],
+      };
+      setTracks([...tracks, newTrack]);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <div>
+    <input type="file" onChange={addTrack}
+    accept="audio/*"
+    style={{ marginBottom: '20px' }}/>
+    <DragDropContext onDragEnd={onDragEnd}>
+    <Droppable droppableId="commonTimeline">
+      {(provided) => (
+        <div ref={provided.innerRef} {...provided.droppableProps} >
+          {tracks.map((track, index) => (
+            <Draggable key={track.id} draggableId={track.id.toString()} index={index}>
+              {(provided) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+  
+                >
+              <AudioTrack  track={track} onSelectPart={handleSelectPart} />
+                </div>
+              )}
+            </Draggable>
+          ))}
+          {provided.placeholder}
+        </div>
+      )}
+    </Droppable>
+      </DragDropContext>
+    
+          <CommonTimeline parts={parts} onDragEnd={onDragEnd} />
 
-export default App;
+    </div>
+  )
+};
+  export default App;
+
