@@ -1,11 +1,8 @@
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { TrackPart } from "./models"; // Adjust import paths as needed
-import "./CommonTimeline.css";
-interface CommonTimelineProps {
-  parts: TrackPart[];
-  onDragEnd: (result: any) => void;
-}
+import { TrackPart,CommonTimelineProps } from "./models"; // Adjust import paths as needed
+import "./static/CommonTimeline.css";
+
 
 const CommonTimeline: React.FC<CommonTimelineProps> = ({
   parts,
@@ -92,11 +89,6 @@ const CommonTimeline: React.FC<CommonTimelineProps> = ({
     height: "10px",
     backgroundColor: "red",
   };
-  const pointerContainerStyle: CSSProperties = {
-    position: "relative",
-    width: "100%",
-    height: "10px",
-  };
 
   return (
     <div>
@@ -135,7 +127,7 @@ const CommonTimeline: React.FC<CommonTimelineProps> = ({
         </Droppable>
       </DragDropContext>
 
-      <div className="pointer-container" style={pointerContainerStyle}>
+      <div className="pointer-container">
         <div className="pointer" style={pointerStyle}></div>
       </div>
     </div>

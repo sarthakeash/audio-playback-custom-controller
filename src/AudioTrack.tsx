@@ -2,11 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 import { Track, TrackPart } from "./models";
 import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.esm.js";
-
-interface AudioTrackProps {
-  track: Track;
-  onSelectPart: (part: TrackPart) => void;
-}
+import { AudioTrackProps } from "./models";
 
 const AudioTrack: React.FC<AudioTrackProps> = ({ track, onSelectPart }) => {
   const waveformRef = useRef<HTMLDivElement | null>(null);

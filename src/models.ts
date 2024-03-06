@@ -12,3 +12,11 @@ export interface Track {
   url: string;
   parts: TrackPart[];
 }
+export interface CommonTimelineProps {
+  parts: TrackPart[];
+  onDragEnd: (result: any) => void;
+}
+export interface AudioTrackProps {
+  track: Track;
+  onSelectPart: (part: TrackPart) => void;
+}

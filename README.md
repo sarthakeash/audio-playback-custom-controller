@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+# Audio Playback Application Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This documentation outlines the functionality and features of the Audio Playback Application, a web-based tool designed for uploading audio tracks, selecting specific parts of these tracks, arranging these parts on a common timeline, and playing them sequentially. The application also includes a visual playback indicator and supports drag-and-drop reordering.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Audio Track Upload**: Enables users to upload audio tracks for playback and manipulation.
+- **Part Selection**: Allows users to select segments from uploaded tracks to add to a common timeline by clicking on the selected piece.
+- **Sequential Playback**: Facilitates the sequential playback of selected audio parts on the common timeline, with a moving pointer to indicate the current playback position.
+- **Drag-and-Drop Reordering**: Provides an interface for reordering audio parts on the timeline through drag-and-drop actions.
 
-### `yarn start`
+## Component Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### AudioTrack Component
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Responsible for displaying individual audio tracks with functionalities to play, pause, and select parts of the track.
 
-### `yarn test`
+- **Props**:
+  - `track`: Information about the track including its URL and selected parts.
+  - `onSelectPart`: Callback function for handling part selection.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### CommonTimeline Component
 
-### `yarn build`
+Displays the selected audio parts on a shared timeline, supports sequential playback with visual indicators, and allows drag-and-drop reordering.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Props**:
+  - `parts`: Array of selected audio parts.
+  - `onDragEnd`: Callback function for handling the reordering of parts.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Implementation Details
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **State Management**: Utilizes React's `useState` and `useRef` for managing component states and referencing DOM elements.
+- **Audio Playback**: Employs the Web Audio API for precise audio playback control, including segment-specific playback.
+- **Drag-and-Drop Functionality**: Integrates `react-beautiful-dnd` for an intuitive reordering interface.
+- **Visual Playback Indicator**: Implements a dynamic pointer that moves across the timeline to indicate current playback position.
 
-### `yarn eject`
+## Challenges and Solutions
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **Audio Playback Synchronization**: Achieved accurate synchronization between audio playback and the visual indicator through meticulous calculation and dynamic updates.
+- **Audio Segments Handling**: Addressed the playback of specific segments by efficiently managing audio data fetching, buffer source creation, and start/stop controls.
+- **Drag-and-Drop State Management**: Ensured accurate state reflection post drag-and-drop operations through careful key and index management.
+- **UI Responsiveness and Usability**: Attained a responsive and user-friendly interface by focusing on layout management and cross-device usability testing.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Conclusion
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The Audio Playback Application showcases the potential of React and the Web Audio API in creating a comprehensive audio manipulation tool. It addresses key challenges in audio processing and user interface design, offering a robust platform for interactive audio engagement with ample room for further development and expansion.
