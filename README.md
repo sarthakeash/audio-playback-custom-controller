@@ -2,6 +2,15 @@
 
 This documentation outlines the functionality and features of the Audio Playback Application, a web-based tool designed for uploading audio tracks, selecting specific parts of these tracks, arranging these parts on a common timeline, and playing them sequentially. The application also includes a visual playback indicator and supports drag-and-drop reordering.
 
+## Installation
+use 
+```
+npm i
+npm start
+```
+to start the applicaton
+
+
 ## Features
 
 - **Audio Track Upload**: Enables users to upload audio tracks for playback and manipulation.
