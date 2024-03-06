@@ -8,7 +8,7 @@ use
 npm i
 npm start
 ```
-to start the applicaton
+to start the react applicaton on localhost:3000
 
 
 ## Features
