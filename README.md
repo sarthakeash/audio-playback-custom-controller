@@ -48,7 +48,6 @@ Displays the selected audio parts on a shared timeline, supports sequential play
 - **Audio Playback Synchronization**: Achieved accurate synchronization between audio playback and the visual indicator through meticulous calculation and dynamic updates.
 - **Audio Segments Handling**: Addressed the playback of specific segments by efficiently managing audio data fetching, buffer source creation, and start/stop controls.
 - **Drag-and-Drop State Management**: Ensured accurate state reflection post drag-and-drop operations through careful key and index management.
-- **UI Responsiveness and Usability**: Attained a responsive and user-friendly interface by focusing on layout management and cross-device usability testing.
 
 
 ## Conclusion
