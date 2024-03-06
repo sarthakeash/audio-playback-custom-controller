@@ -44,11 +44,6 @@ Displays the selected audio parts on a shared timeline, supports sequential play
 - **Visual Playback Indicator**: Implements a dynamic pointer that moves across the timeline to indicate current playback position.
 - **Interfaces usage**: Using the TrackPart interface to store the endTime and startTime along with the trackUrl to play the selected audio section on the common timeline, one by one.
 
-## Challenges and Solutions
-
-- **Audio Playback Synchronization**: Achieved accurate synchronization between audio playback and the visual indicator through meticulous calculation and dynamic updates.
-- **Audio Segments Handling**: Addressed the playback of specific segments by efficiently managing audio data fetching, buffer source creation, and start/stop controls.
-- **Drag-and-Drop State Management**: Ensured accurate state reflection post drag-and-drop operations through careful key and index management.
 
 
 ## Conclusion
