@@ -42,6 +42,7 @@ Displays the selected audio parts on a shared timeline, supports sequential play
 - **Audio Playback**: Employs the Web Audio API for precise audio playback control, including segment-specific playback.
 - **Drag-and-Drop Functionality**: Integrates `react-beautiful-dnd` for an intuitive reordering interface.
 - **Visual Playback Indicator**: Implements a dynamic pointer that moves across the timeline to indicate current playback position.
+- **Interfaces usage**: Using the TrackPart interface to store the endTime and startTime along with the trackUrl to play the selected audio section on the common timeline, one by one.
 
 ## Challenges and Solutions
 
