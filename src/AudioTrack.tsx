@@ -4,7 +4,7 @@ import { Track, TrackPart } from "./models";
 import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.esm.js";
 import { AudioTrackProps } from "./models";
 
-const AudioTrack: React.FC<AudioTrackProps> = ({ track, onSelectPart }) => {
+const AudioTrack: React.FC<AudioTrackProps> = ({ track, onSelectPart,playAll }) => {
   const waveformRef = useRef<HTMLDivElement | null>(null);
   const wavesurfer = useRef<WaveSurfer | null>(null);
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
@@ -74,6 +74,14 @@ const AudioTrack: React.FC<AudioTrackProps> = ({ track, onSelectPart }) => {
       return () => wavesurfer.current.destroy();
     }
   }, [track]);
+
+  useEffect(() => {
+    if (playAll) {
+      wavesurfer.current?.play();
+    } else {
+      wavesurfer.current?.pause();
+    }
+  }, [playAll]);
 
   const handlePlay = () => {
     if (wavesurfer.current) {

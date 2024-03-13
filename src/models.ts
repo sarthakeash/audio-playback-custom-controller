@@ -1,7 +1,7 @@
 export interface TrackPart {
   id: string;
   startTime: number;
-  url: string; 
+  url: string;
   endTime: number;
   trackId: number;
   label?: string;
@@ -19,4 +19,6 @@ export interface CommonTimelineProps {
 export interface AudioTrackProps {
   track: Track;
   onSelectPart: (part: TrackPart) => void;
+  playAll: boolean; // New prop to control playback from the parent component
+
 }

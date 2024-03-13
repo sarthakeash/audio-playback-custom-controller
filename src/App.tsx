@@ -8,7 +8,11 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 const App: React.FC = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [parts, setParts] = useState<TrackPart[]>([]);
+  const [playAll, setPlayAll] = useState(false); // State to control parallel playback
 
+  const togglePlayAll = () => {
+    setPlayAll(!playAll);
+  };
   const onDragEnd = (result: any) => {
     if (!result.destination) return;
     const items = Array.from(parts);
@@ -37,7 +41,11 @@ const App: React.FC = () => {
     <div>
     <input type="file" onChange={addTrack}
     accept="audio/*"
-    style={{ marginBottom: '20px' }}/>
+        style={{ marginBottom: '20px' }}
+      />
+       <button onClick={togglePlayAll}>
+        {playAll ? 'Stop All Tracks' : 'Play All Tracks'}
+      </button>
     <DragDropContext onDragEnd={onDragEnd}>
     <Droppable droppableId="commonTimeline">
       {(provided) => (
@@ -51,7 +59,7 @@ const App: React.FC = () => {
                   {...provided.dragHandleProps}
   
                 >
-              <AudioTrack  track={track} onSelectPart={handleSelectPart} />
+              <AudioTrack  track={track} onSelectPart={handleSelectPart} playAll={playAll} />
                 </div>
               )}
             </Draggable>
