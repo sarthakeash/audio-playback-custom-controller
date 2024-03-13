@@ -44,7 +44,10 @@ const App: React.FC = () => {
         accept="audio/*"
         style={{ marginBottom: "20px" }}
       />
-      <button onClick={togglePlayAll} style={{ display: "block" }}>
+      <button
+        onClick={togglePlayAll}
+        style={{ display: "block", marginBottom: "30px" }}
+      >
         {playAll ? "Stop" : "Parallel Play Uploaded Tracks"}
       </button>
       <DragDropContext onDragEnd={onDragEnd}>
