@@ -1,8 +1,7 @@
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { TrackPart,CommonTimelineProps } from "./models"; // Adjust import paths as needed
+import { TrackPart, CommonTimelineProps } from "./models"; // Adjust import paths as needed
 import "./static/CommonTimeline.css";
-
 
 const CommonTimeline: React.FC<CommonTimelineProps> = ({
   parts,
@@ -10,8 +9,8 @@ const CommonTimeline: React.FC<CommonTimelineProps> = ({
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioCtxRef = useRef<AudioContext | null>(null);
-  const [currentTime, setCurrentTime] = useState(0); 
-  const requestIdRef = useRef<number | null>(null); 
+  const [currentTime, setCurrentTime] = useState(0);
+  const requestIdRef = useRef<number | null>(null);
   const playbackIntervalRef = useRef<NodeJS.Timer | null>(null);
   const totalDuration = parts.reduce(
     (total, part) => total + (part.endTime - part.startTime) * 1000,
@@ -92,8 +91,9 @@ const CommonTimeline: React.FC<CommonTimelineProps> = ({
 
   return (
     <div>
+      <p>Common Timeline (Select parts and play here)</p>
       <button onClick={playPartsSequentially} disabled={isPlaying}>
-        {isPlaying ? "Playing..." : "Play All Parts"}
+        {isPlaying ? "Playing..." : "Play Selected Parts as in order"}
       </button>
       <button onClick={stopPlayback} disabled={!isPlaying}>
         Stop

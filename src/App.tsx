@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import AudioTrack from './AudioTrack';
-import CommonTimeline from './CommonTimeline';
-import { Track, TrackPart } from './models';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-
+import React, { useState } from "react";
+import AudioTrack from "./AudioTrack";
+import CommonTimeline from "./CommonTimeline";
+import { Track, TrackPart } from "./models";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 const App: React.FC = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
@@ -39,41 +38,48 @@ const App: React.FC = () => {
 
   return (
     <div>
-    <input type="file" onChange={addTrack}
-    accept="audio/*"
-        style={{ marginBottom: '20px' }}
+      <input
+        type="file"
+        onChange={addTrack}
+        accept="audio/*"
+        style={{ marginBottom: "20px" }}
       />
-       <button onClick={togglePlayAll}>
-        {playAll ? 'Stop All Tracks' : 'Play All Tracks'}
+      <button onClick={togglePlayAll} style={{ display: "block" }}>
+        {playAll ? "Stop" : "Parallel Play Uploaded Tracks"}
       </button>
-    <DragDropContext onDragEnd={onDragEnd}>
-    <Droppable droppableId="commonTimeline">
-      {(provided) => (
-        <div ref={provided.innerRef} {...provided.droppableProps} >
-          {tracks.map((track, index) => (
-            <Draggable key={track.id} draggableId={track.id.toString()} index={index}>
-              {(provided) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-  
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="commonTimeline">
+          {(provided) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              {tracks.map((track, index) => (
+                <Draggable
+                  key={track.id}
+                  draggableId={track.id.toString()}
+                  index={index}
                 >
-              <AudioTrack  track={track} onSelectPart={handleSelectPart} playAll={playAll} />
-                </div>
-              )}
-            </Draggable>
-          ))}
-          {provided.placeholder}
-        </div>
-      )}
-    </Droppable>
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <AudioTrack
+                        track={track}
+                        onSelectPart={handleSelectPart}
+                        playAll={playAll}
+                      />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
       </DragDropContext>
-    
-          <CommonTimeline parts={parts} onDragEnd={onDragEnd} />
 
+      <CommonTimeline parts={parts} onDragEnd={onDragEnd} />
     </div>
-  )
+  );
 };
-  export default App;
-
+export default App;

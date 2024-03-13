@@ -3,8 +3,13 @@ import WaveSurfer from "wavesurfer.js";
 import { Track, TrackPart } from "./models";
 import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.esm.js";
 import { AudioTrackProps } from "./models";
+import TimelinePlugin from "wavesurfer.js/dist/plugins/timeline.esm.js";
 
-const AudioTrack: React.FC<AudioTrackProps> = ({ track, onSelectPart,playAll }) => {
+const AudioTrack: React.FC<AudioTrackProps> = ({
+  track,
+  onSelectPart,
+  playAll,
+}) => {
   const waveformRef = useRef<HTMLDivElement | null>(null);
   const wavesurfer = useRef<WaveSurfer | null>(null);
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
@@ -29,12 +34,14 @@ const AudioTrack: React.FC<AudioTrackProps> = ({ track, onSelectPart,playAll }) 
         cursorColor: "transparent",
         barWidth: 2,
         height: 100,
+        plugins: [TimelinePlugin.create()],
       });
 
       wavesurfer.current.load(track.url);
       const wsRegions = wavesurfer.current.registerPlugin(
         RegionsPlugin.create()
       );
+
       const random = (min, max) => Math.random() * (max - min) + min;
       const randomColor = () =>
         `rgba(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, 0.5)`;
@@ -47,6 +54,17 @@ const AudioTrack: React.FC<AudioTrackProps> = ({ track, onSelectPart,playAll }) 
           color: randomColor(),
           minLength: 1,
           maxLength: 100,
+        });
+      });
+
+      wavesurfer.current.once("decode", () => {
+        const slider = document.querySelector(
+          `#track-${track.id}`
+        ) as HTMLInputElement;
+
+        slider.addEventListener("input", (e) => {
+          const minPxPerSec = (e.target as HTMLInputElement).valueAsNumber;
+          wavesurfer.current.zoom(minPxPerSec);
         });
       });
 
@@ -97,16 +115,25 @@ const AudioTrack: React.FC<AudioTrackProps> = ({ track, onSelectPart,playAll }) 
     }
   };
   return (
-    <>
+    <div style={{ marginBottom: "30px" }}>
+      <label>
+        Zoom:{" "}
+        <input type="range" min="10" max="1000" id={`track-${track.id}`} />
+      </label>
+
       <div className="audio-track">
         <div id={`waveform-${track.id}`} ref={waveformRef}></div>
       </div>
       {isPlaying ? (
-        <button onClick={handlePause}>Pause</button>
+        <button onClick={handlePause} style={{ marginTop: "10px" }}>
+          Pause
+        </button>
       ) : (
-        <button onClick={handlePlay}>Play</button>
+        <button onClick={handlePlay} style={{ marginTop: "10px" }}>
+          Play the above track
+        </button>
       )}
-    </>
+    </div>
   );
 };
 
