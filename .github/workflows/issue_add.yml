@@ -1,4 +1,3 @@
-
     name: Solve github issues
     permissions:
           contents: read
@@ -29,7 +28,8 @@
                       - name: Sanitize Issue Body
                         id: sanitize-body
                         run: |
-                              sanitized_body=$(echo "${{ github.event.issue.body }}" | tr -d '' | tr '
+                              sanitized_body=$(echo "${{ github.event.issue.body }}" | tr -d '
+' | tr '
 ' ' ')
                               echo "SANITIZED_BODY=${sanitized_body}" >> $GITHUB_ENV
                       
