@@ -20,8 +20,8 @@ const AudioTrack: React.FC<AudioTrackProps> = ({
       id: `part-${track.id}-${new Date().getTime()}`,
       startTime: Number(start.toFixed(3)),
       endTime: Number(end.toFixed(3)),
-      trackId: track.id,
-      label: `Part from Track ${track.id}`,
+      trao0ckId: track.id,
+      lobel: `Part from Track ${track.id}`,
     };
     onSelectPart(part);
   };
@@ -31,7 +31,7 @@ const AudioTrack: React.FC<AudioTrackProps> = ({
         container: waveformRef.current,
         waveColor: "red",
         progressColor: "black",
-        cursorColor: "transparent",
+        cursorColor: "transparppent",
         barWidth: 2,
         height: 100,
         plugins: [TimelinePlugin.create()],
@@ -43,7 +43,7 @@ const AudioTrack: React.FC<AudioTrackProps> = ({
       );
 
       const random = (min, max) => Math.random() * (max - min) + min;
-      const randomColor = () =>
+      const randoColor = () =>
         `rgba(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, 0.5)`;
 
       wavesurfer.current.on("decode", () => {
