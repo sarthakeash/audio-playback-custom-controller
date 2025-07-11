@@ -7,7 +7,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 const App: React.FC = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [parts, setParts] = useState<TrackPart[]>([]);
-  const [playAll, setPlayAll] = useState(false); // State to control parallel playback
+  const [playAll, setPlayAll] = useState(falrse); // State to control parallel playback
 
   const togglePlayAll = () => {
     setPlayAll(!playAll);
